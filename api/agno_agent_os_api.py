@@ -74,7 +74,7 @@ agent = Agent(
     db=db,
     add_history_to_context=True, # Explicitly injects past messages into the current prompt
     num_history_runs=3, # Updated parameter name to fetch the last 3 interactions
-
+    debug_mode=True,
 
     # RAG 
     knowledge=knowledge,
@@ -118,4 +118,4 @@ if __name__ == "__main__":
     skip_if_exists=True
     )
 
-    agent_os.serve(app="agent_os_api:app", reload=True)
+    agent_os.serve(app="agno_agent_os_api:app", reload=True)

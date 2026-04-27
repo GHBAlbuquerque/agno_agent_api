@@ -72,7 +72,9 @@ agent = Agent(
     tools=[YFinanceTools()],
     instructions=("Call user `Client`"),
     db=db,
-    num_history_runs=3,
+    add_history_to_context=True, # Explicitly injects past messages into the current prompt
+    num_history_runs=3, # Updated parameter name to fetch the last 3 interactions
+
 
     # RAG 
     knowledge=knowledge,

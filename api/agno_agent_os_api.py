@@ -74,7 +74,7 @@ agent = Agent(
     db=db,
     add_history_to_context=True, # Explicitly injects past messages into the current prompt
     num_history_runs=3, # Updated parameter name to fetch the last 3 interactions
-    debug_mode=True,
+    debug_mode=False,
 
     # RAG 
     knowledge=knowledge,

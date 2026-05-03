@@ -30,6 +30,7 @@ def get_response_stream(message: str):
         if not line:
             continue
         
+        #print(f"Raw: {line}")
         line_str = line.decode('utf-8').strip()
 
         # Agno sends 'event: Name' followed by 'data: { ... }'
@@ -51,14 +52,20 @@ def get_response_stream(message: str):
                 buffer = "" # Clear buffer after successful yield
             except json.JSONDecodeError:
                 # Still incomplete, wait for more lines
-                continue
+                continue            
 
 # 2 - Print answer
 
 def print_streaming_response(message: str):
     for event in get_response_stream(message):
         event_type = event.get("event", "")
-        print(event_type)
+        content = event.get("content", "")
+
+        if event_type == "RunContent":
+            print(content, end="", flush=True)
+
+        if event_type == "RunCompleted":
+            print(f"\n[Run Finshed: {event_type}]")
 
 # 3 - Run server
 
@@ -67,3 +74,18 @@ if __name__ == "__main__":
         message = input("Ask anything: ")
         print_streaming_response(message)
 
+
+
+# example
+# Raw: b'event: RunContent'
+# Raw: b'data: {'
+# Raw: b'  "created_at": 1777836387,'
+# Raw: b'  "event": "RunContent",'
+# Raw: b'  "agent_id": "api_agent_os",'
+# Raw: b'  "agent_name": "api_agent_os",'
+# Raw: b'  "run_id": "d9399bee-9f3f-4443-8150-641c1087bb53",'
+# Raw: b'  "session_id": "08f31dcd-40ce-4083-ac17-b6799b48c5e3",'
+# Raw: b'  "content": ".",'
+# Raw: b'  "content_type": "str",'
+# Raw: b'  "reasoning_content": ""'
+# Raw: b'}'

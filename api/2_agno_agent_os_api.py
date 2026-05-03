@@ -118,4 +118,4 @@ if __name__ == "__main__":
     skip_if_exists=True
     )
 
-    agent_os.serve(app="agno_agent_os_api:app", reload=True)
+    agent_os.serve(app="2_agno_agent_os_api:app", reload=True)

@@ -112,10 +112,10 @@ app = agent_os.get_app()
 # ======================
 
 if __name__ == "__main__":
-    knowledge.add_content_async(
+    asyncio.run(knowledge.add_content_async(
     path="files/UBISOFT/",
     reader=pdf_reader,
     skip_if_exists=True
-    )
+    ))
 
     agent_os.serve(app="2_agno_agent_os_api:app", reload=True)
